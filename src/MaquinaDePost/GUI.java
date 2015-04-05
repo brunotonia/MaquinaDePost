@@ -6,6 +6,7 @@
 package MaquinaDePost;
 
 import java.awt.Robot;
+import javax.swing.ImageIcon;
 
 public class GUI extends javax.swing.JFrame {
 
@@ -254,11 +255,6 @@ public class GUI extends javax.swing.JFrame {
 
         txtEquacao2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtEquacao2.setText("0");
-        txtEquacao2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtEquacao2KeyTyped(evt);
-            }
-        });
 
         txtEquacao1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtEquacao1.setText("0");
@@ -390,16 +386,6 @@ public class GUI extends javax.swing.JFrame {
     private void txtEquacao1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquacao1KeyPressed
         
     }//GEN-LAST:event_txtEquacao1KeyPressed
-
-    private void txtEquacao2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquacao2KeyTyped
-        String caracteres = "0987654321";
-
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-
-            evt.consume();
-
-        }
-    }//GEN-LAST:event_txtEquacao2KeyTyped
 
     /**
      * @param args the command line arguments
