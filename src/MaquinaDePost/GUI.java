@@ -182,6 +182,7 @@ public class GUI extends javax.swing.JFrame {
                     contador += " ";
                 }
             } else {
+                contador += " ";
                 palavra = palavra.substring(1);
             }
             txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra);
