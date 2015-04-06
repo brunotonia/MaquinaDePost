@@ -5,7 +5,6 @@
  */
 package MaquinaDePost;
 
-import java.awt.Robot;
 import javax.swing.Timer;
 
 public class GUI extends javax.swing.JFrame {
@@ -17,7 +16,6 @@ public class GUI extends javax.swing.JFrame {
     private final String alfabeto5 = "#";
     private String palavra = "";
     private String contador = "";
-    private Robot robot = null;
 
     private void geraPalavra(Integer parte1, Integer parte2) {
         for (int i = 0; i < parte1; i++) {
