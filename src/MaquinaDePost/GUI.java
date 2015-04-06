@@ -6,10 +6,6 @@
 package MaquinaDePost;
 
 import java.awt.Robot;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 public class GUI extends javax.swing.JFrame {
