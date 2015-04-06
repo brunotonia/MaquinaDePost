@@ -6,7 +6,11 @@
 package MaquinaDePost;
 
 import java.awt.Robot;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class GUI extends javax.swing.JFrame {
 
@@ -40,12 +44,10 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void esperar() {
-        //robot.delay(500);
-        //Thread.sleep(500);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-        }
+        Timer timer = new Timer(2000, null);
+        timer.setRepeats(false);
+        timer.setInitialDelay(5000);
+        timer.start();
     }
 
     private void soma() {
@@ -173,10 +175,14 @@ public class GUI extends javax.swing.JFrame {
             }
             //System.out.println("Contador A: " + contador_a);
             // Remove os iguais
-            palavra += alfabeto3;
-            palavra = palavra.substring(contador_a);
-            for (int i = 0; i < contador_a; i++) {
-                contador += " ";
+            if (contador_a > 0 && contador_a == contador_b) {
+                palavra += alfabeto3;
+                palavra = palavra.substring(contador_a);
+                for (int i = 0; i < contador_a; i++) {
+                    contador += " ";
+                }
+            } else {
+                palavra = palavra.substring(1);
             }
             txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra);
             atual = palavra.substring(0, 1);
@@ -384,7 +390,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEquacao1KeyTyped
 
     private void txtEquacao1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquacao1KeyPressed
-        
+
     }//GEN-LAST:event_txtEquacao1KeyPressed
 
     /**
