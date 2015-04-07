@@ -72,31 +72,71 @@ public class GUI extends javax.swing.JFrame {
         esperar();
         palavra += alfabeto5;
         txtComputacao.setText(txtComputacao.getText() + "\n" + palavra);
-        int cont = 0;
-        String atual = palavra.substring(cont, cont + 1);
+        String atual = palavra.substring(0, 1);
         while (!atual.equals(alfabeto5)) {
-            String copia;
-            if (atual.equals(alfabeto1)) {
-                int aux = palavra.indexOf(alfabeto2);
-                if (aux != -1) {
-                    copia = palavra.substring(1, aux) + palavra.substring(aux + 1);
-                    palavra = copia;
-                }
+            switch (atual) {
+                case alfabeto1:
+                    int posicao_b = palavra.indexOf(alfabeto2);
+                    if (posicao_b != -1) {
+                        //palavra += alfabeto3;
+                        palavra = palavra.substring(0, posicao_b) + palavra.substring(posicao_b + 1);
+                        palavra = palavra.substring(1);
+                        contador += "  ";
+                    } else {
+                        palavra += alfabeto3;
+                        palavra = palavra.substring(1);
+                        contador += " ";
+                    }
+                    break;
+                case alfabeto2:
+                    palavra += alfabeto4;
+                    palavra = palavra.substring(1);
             }
-            cont++;
-            atual = palavra.substring(cont, cont + 1);
             esperar();
-            contador += " ";
-            txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra);
-            if (atual.equals(alfabeto5)) {
-                esperar();
-                contador += " ";
-                txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra.substring(0, palavra.length() - 1));
-            }
+            atual = palavra.substring(0, 1);
+            txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra); 
         }
+        if (atual.equals(alfabeto5)) {
+            palavra = palavra.substring(1);
+            contador += " ";
+            esperar();
+            txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra);
+        }
+        /*for (Integer i = 0; i < palavra.length(); i++) {
+            System.out.println("tamanho: " + palavra.length());
+            System.out.println("palavra(" + i + "): " + palavra.charAt(i));
+            Integer resultado = 0;
+            if (palavra.charAt(i) == 'c') {
+                resultado++;
+            } 
+            if (palavra.charAt(i) == 'd') {
+                resultado = resultado - 1;
+            }
+            txtResultado.setText(resultado.toString());
+        }*/
+        palavra += alfabeto5;
+        atual = palavra.substring(0, 1);
+        Integer resultado = 0;
+        while (!atual.equals(alfabeto5)) {
+            System.out.println(atual);
+            switch (atual) {
+                case alfabeto3:
+                    resultado++;
+                    break;
+                case alfabeto4:
+                    resultado--;
+                    break;
+            }
+            palavra = palavra.substring(1);
+            atual = palavra.substring(0, 1);
+        }
+        esperar();
+        txtResultado.setText(resultado.toString());
+        /*
         for (Integer i = 1; i < palavra.length() + 1; i++) {
             txtResultado.setText(i.toString());
         }
+        */
     }
 
     public void multiplicacao() {
@@ -179,6 +219,7 @@ public class GUI extends javax.swing.JFrame {
                 contador += " ";
                 palavra = palavra.substring(1);
             }
+            esperar();
             txtComputacao.setText(txtComputacao.getText() + "\n" + contador + palavra);
             atual = palavra.substring(0, 1);
         }
@@ -227,10 +268,10 @@ public class GUI extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         btnExecutar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Máquina de Post");
-        setPreferredSize(new java.awt.Dimension(600, 600));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Máquina de Post");
@@ -284,6 +325,8 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("https://github.com/brunotonia/MaquinaDePost");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,7 +338,8 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExecutar))
@@ -303,8 +347,6 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel4)
@@ -312,7 +354,9 @@ public class GUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cboxOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEquacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtEquacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -321,7 +365,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(20, 20, 20)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,8 +387,9 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExecutar)
-                    .addComponent(btnLimpar))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(btnLimpar)
+                    .addComponent(jLabel5))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -375,9 +420,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void txtEquacao1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEquacao1KeyTyped
         String caracteres = "0987654321";
-
         if (!caracteres.contains(evt.getKeyChar() + "")) {
-
             evt.consume();
 
         }
@@ -431,6 +474,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
